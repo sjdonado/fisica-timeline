@@ -29,8 +29,7 @@ module.exports = React.createClass({
     context = this;
     timelines = $('.cd-horizontal-timeline');
     firebase.database().ref('/items').on("value", function (snapshot) {
-      console.log('VAL', snapshot.val());
-      context.setState({ items: snapshot.val() })
+      context.setState({ items: snapshot.val() });
       context.initialize(timelines);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);

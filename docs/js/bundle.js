@@ -19179,9 +19179,8 @@ module.exports = React.createClass({
   componentDidMount: function () {
     context = this;
     timelines = $('.cd-horizontal-timeline');
-    firebase.database().ref('/items').on("value", snapshot => {
-      console.log('VAL', snapshot.val());
-      this.setState({ items: snapshot.val() });
+    firebase.database().ref('/items').on("value", function (snapshot) {
+      context.setState({ items: snapshot.val() });
       context.initialize(timelines);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
@@ -19251,7 +19250,7 @@ module.exports = React.createClass({
     });
   },
 
-  updateSlide(timelineComponents, timelineTotWidth, string) {
+  updateSlide: function (timelineComponents, timelineTotWidth, string) {
     //retrieve translateX value of timelineComponents['eventsWrapper']
     var translateValue = context.getTranslateValue(timelineComponents['eventsWrapper']),
         wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
