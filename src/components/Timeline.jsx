@@ -28,11 +28,10 @@ module.exports = React.createClass({
   componentDidMount: function () {
     context = this;
     timelines = $('.cd-horizontal-timeline');
-    context.initialize(timelines);
-    firebase.database().ref('/items').on("value", (snapshot) => {
+    firebase.database().ref('/items').on("value", function (snapshot) {
       console.log('VAL', snapshot.val());
-      // this.state.items = snapshot.val();
-      this.setState({ items: snapshot.val() })
+      context.setState({ items: snapshot.val() })
+      context.initialize(timelines);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -101,7 +100,7 @@ module.exports = React.createClass({
     });
   },
 
-  updateSlide(timelineComponents, timelineTotWidth, string) {
+  updateSlide: function (timelineComponents, timelineTotWidth, string) {
     //retrieve translateX value of timelineComponents['eventsWrapper']
     var translateValue = context.getTranslateValue(timelineComponents['eventsWrapper']),
       wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
@@ -309,17 +308,11 @@ module.exports = React.createClass({
           <div className="events-wrapper">
             <div className="events">
               <ol>
-                <li><a href="#0" data-date="16/01/2014" className="selected">16 Jan</a></li>
-                <li><a href="#0" data-date="28/02/2014">28 Feb</a></li>
-                <li><a href="#0" data-date="20/04/2014">20 Mar</a></li>
-                <li><a href="#0" data-date="20/05/2014">20 May</a></li>
-                <li><a href="#0" data-date="09/07/2014">09 Jul</a></li>
-                <li><a href="#0" data-date="30/08/2014">30 Aug</a></li>
-                <li><a href="#0" data-date="15/09/2014">15 Sep</a></li>
-                <li><a href="#0" data-date="01/11/2014">01 Nov</a></li>
-                <li><a href="#0" data-date="10/12/2014">10 Dec</a></li>
-                <li><a href="#0" data-date="19/01/2015">29 Jan</a></li>
-                <li><a href="#0" data-date="03/03/2015">3 Mar</a></li>
+                {this.state.items.map(function (item, i) {
+                  return (
+                    <li key={i}><a href="#0" data-date={item.formatDate} className={item.myClass}>{item.date}</a></li>
+                  )
+                }.bind(this))}
               </ol>
               <span className="filling-line" aria-hidden="true"></span>
             </div>
@@ -333,7 +326,7 @@ module.exports = React.createClass({
           <ol>
             {this.state.items.map(function (item, i) {
               return (
-                <li key={i} className={item.myClass} data-date={item.dataDate}>
+                <li key={i} className={item.myClass} data-date={item.formatDate}>
                   <h2>{item.title}</h2>
                   <em>{item.subtitle}</em>
                   <p> {item.desc}</p>

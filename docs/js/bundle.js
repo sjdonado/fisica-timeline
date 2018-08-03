@@ -19179,11 +19179,10 @@ module.exports = React.createClass({
   componentDidMount: function () {
     context = this;
     timelines = $('.cd-horizontal-timeline');
-    context.initialize(timelines);
     firebase.database().ref('/items').on("value", snapshot => {
       console.log('VAL', snapshot.val());
-      // this.state.items = snapshot.val();
       this.setState({ items: snapshot.val() });
+      context.initialize(timelines);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -19466,105 +19465,17 @@ module.exports = React.createClass({
             React.createElement(
               "ol",
               null,
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "16/01/2014", className: "selected" },
-                  "16 Jan"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "28/02/2014" },
-                  "28 Feb"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "20/04/2014" },
-                  "20 Mar"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "20/05/2014" },
-                  "20 May"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "09/07/2014" },
-                  "09 Jul"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "30/08/2014" },
-                  "30 Aug"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "15/09/2014" },
-                  "15 Sep"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "01/11/2014" },
-                  "01 Nov"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "10/12/2014" },
-                  "10 Dec"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "19/01/2015" },
-                  "29 Jan"
-                )
-              ),
-              React.createElement(
-                "li",
-                null,
-                React.createElement(
-                  "a",
-                  { href: "#0", "data-date": "03/03/2015" },
-                  "3 Mar"
-                )
-              )
+              this.state.items.map(function (item, i) {
+                return React.createElement(
+                  "li",
+                  { key: i },
+                  React.createElement(
+                    "a",
+                    { href: "#0", "data-date": item.formatDate, className: item.myClass },
+                    item.date
+                  )
+                );
+              }.bind(this))
             ),
             React.createElement("span", { className: "filling-line", "aria-hidden": "true" })
           )
@@ -19601,7 +19512,7 @@ module.exports = React.createClass({
           this.state.items.map(function (item, i) {
             return React.createElement(
               "li",
-              { key: i, className: item.myClass, "data-date": item.dataDate },
+              { key: i, className: item.myClass, "data-date": item.formatDate },
               React.createElement(
                 "h2",
                 null,
