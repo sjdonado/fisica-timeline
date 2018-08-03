@@ -16,9 +16,9 @@
     "uglify-js": "^2.6.1"
   },
   "scripts": {
-    "build-dev": "browserify -t [ babelify --presets [react] ] src/main.js -o client/js/bundle.js",
-    "build-prod": "browserify -t [ babelify --presets [react] ] src/main.js | uglifyjs > client/js/bundle.min.js",
-    "watch": "watchify -t [ babelify --presets [react] ] src/main.js -o client/js/bundle.js",
+    "build-dev": "browserify -t [ babelify --presets [react] ] src/main.js -o docs/js/bundle.js",
+    "build-prod": "browserify -t [ babelify --presets [react] ] src/main.js | uglifyjs > docs/js/bundle.min.js",
+    "watch": "watchify -t [ babelify --presets [react] ] src/main.js -o docs/js/bundle.js",
     "clean-js": "rm public/*.js"
   }
 }
