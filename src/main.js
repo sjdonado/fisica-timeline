@@ -1,13 +1,11 @@
-var React    = require('react');
+var React = require('react');
 var ReactDOM = require('react-dom');
-var App      = require('./App.jsx');
-
-
+var App = require('./App.jsx');
 
 function startApp() {
-    ReactDOM.render( <App/>, document.getElementById("app-container") );  
+  ReactDOM.render( < App / > , document.getElementById("app-container"));
 };
 
-window.onload = function(){
-    startApp(); 
+window.onload = function () {
+  startApp();
 };

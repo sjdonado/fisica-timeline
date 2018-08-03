@@ -1,24 +1,15 @@
-var React    = require('react');
-var TimeLine = require('./components/TimeLine.jsx');
-
-
+var React = require('react');
+var TimeLine = require('./components/Timeline.jsx');
 
 module.exports = React.createClass({
-  
-  getInitialState: function() {
+  getInitialState: function () {
     return {}
   },
-
-  render: function() {
+  render: function () {
     return (
-
-      <div id="App"> 
-        
-        <TimeLine/>
-        
+      <div id="App">
+        <TimeLine />
       </div>
-      
     )
   }
-    
 });
