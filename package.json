@@ -7,11 +7,12 @@
   "dependencies": {
     "babel-preset-react": "^6.1.18",
     "babelify": "^7.2.0",
+    "lodash": "^4.17.13",
     "react": "^0.14.3",
-    "react-router-component": ">=0.27",
-    "react-router-component-transition": "^0.2.0",
     "react-addons-css-transition-group": "^0.14.1",
     "react-dom": "^0.14.2",
+    "react-router-component": ">=0.27",
+    "react-router-component-transition": "^0.2.0",
     "reactify": "^1.1.1",
     "uglify-js": "^2.6.1"
   },
