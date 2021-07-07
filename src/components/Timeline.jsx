@@ -6,7 +6,7 @@ var context;
 
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyCK0MjmJaxtIp1oCn8xWTe15F3638xFbqY",
+  apiKey: process.env.FIRE_BASE_API_KEY,
   authDomain: "timeline-a9201.firebaseapp.com",
   databaseURL: "https://timeline-a9201.firebaseio.com",
   projectId: "timeline-a9201",
